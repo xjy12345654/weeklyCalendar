@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    
+    <title>Document</title>
+    <style>
+      body, ul, p {
+        margin: 0;
+        padding: 0;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      .week_wrapper_box {
+        margin-top:20px;
+        overflow: hidden;
+      }
+
+      .year_month{
+        padding: 10px 15px;
+      }
+
+      .week_cal_box {
+        display: flex;
+        width: 500%;
+        transition: transform 0.7s;
+        transform: translateX(-40%);
+        /* -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            -ms-backface-visibility: hidden;
+            backface-visibility: hidden; */
+      }
+
+      .week_content {
+        display: flex;
+        width: 100%;
+        text-align: center;
+        background-color: rgba(255, 127, 80, 0.253);
+      }
+
+      .week_tit_info {
+        background-color: #fff;
+      }
+
+      .week_tit_info .week_num {
+        height: 25px;
+      
+        flex: 1;
+      }
+
+      .week_content .month_num {
+        flex: 1;
+        height: 35px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+  
+      }
+      .m_num_sty {
+        width: 30px;
+        height: 30px;
+        text-indent: -2px;
+        text-align: center;
+        line-height: 30px;
+        border-radius: 50%;
+ 
+      }
+      .today {
+        background: #7DA8ED;
+        color: #fff;
+      }
+      .selected_num{
+         border: 2px solid #7DA8ED;
+
+      }
+
+      .year_month{
+           display: flex;
+           text-align: center;
+      }
+
+      #year_text, #month_text{
+        overflow: hidden;
+      
+      }
+
+      #year_text{
+        width: 12%;
+         
+      }
+      #month_text{
+        width: 8%;
+         
+        
+      }
+    </style>
+  </head>
+
+  <body>
+
+  
+    <div class="week_wrapper_box">
+
+      <div class="year_month">
+        <div id=year_text>1</div>年
+        <div id="month_text">1</div>月
+      </div>
+  
+      <ul class="week_content week_tit_info">
+        <li class="week_num">一</li>
+        <li class="week_num">二</li>
+        <li class="week_num">三</li>
+        <li class="week_num">四</li>
+        <li class="week_num">五</li>
+        <li class="week_num">六</li>
+        <li class="week_num">日</li>
+      </ul>
+
+      <div class="week_cal_box">
+        <ul class="week_content" id="content1">
+          <li class="month_num"><span class="m_num_sty">44</span></li>
+          <li class="month_num"><span class="m_num_sty">44</span></li>
+          <li class="month_num"><span class="m_num_sty">44</span></li>
+          <li class="month_num"><span class="m_num_sty">44</span></li>
+          <li class="month_num"><span class="m_num_sty">44</span></li>
+          <li class="month_num"><span class="m_num_sty">44</span></li>
+          <li class="month_num"><span class="m_num_sty">44</span></li>
+        </ul>
+
+        <ul class="week_content" id="content2">
+          <li class="month_num"><span class="m_num_sty">22</span></li>
+          <li class="month_num"><span class="m_num_sty">22</span></li>
+          <li class="month_num"><span class="m_num_sty">22</span></li>
+          <li class="month_num"><span class="m_num_sty">22</span></li>
+          <li class="month_num"><span class="m_num_sty">22</span></li>
+          <li class="month_num"><span class="m_num_sty">22</span></li>
+          <li class="month_num"><span class="m_num_sty">22</span></li>
+        </ul>
+
+        <ul class="week_content" id="content3">
+          <li class="month_num"><span class="m_num_sty">33</span></li>
+          <li class="month_num"><span class="m_num_sty">33</span></li>
+          <li class="month_num"><span class="m_num_sty">33</span></li>
+          <li class="month_num"><span class="m_num_sty">33</span></li>
+          <li class="month_num"><span class="m_num_sty">33</span></li>
+          <li class="month_num"><span class="m_num_sty">33</span></li>
+          <li class="month_num"><span class="m_num_sty">33</span></li>
+        </ul>
+
+        <ul class="week_content" id="content4">
+          <li class="month_num"><span class="m_num_sty">44</span></li>
+          <li class="month_num"><span class="m_num_sty">44</span></li>
+          <li class="month_num"><span class="m_num_sty">44</span></li>
+          <li class="month_num"><span class="m_num_sty">44</span></li>
+          <li class="month_num"><span class="m_num_sty">44</span></li>
+          <li class="month_num"><span class="m_num_sty">44</span></li>
+          <li class="month_num"><span class="m_num_sty">44</span></li>
+        </ul>
+
+        <ul class="week_content" id="content5">
+          <li class="month_num"><span class="m_num_sty">22</span></li>
+          <li class="month_num"><span class="m_num_sty">22</span></li>
+          <li class="month_num"><span class="m_num_sty">22</span></li>
+          <li class="month_num"><span class="m_num_sty">22</span></li>
+          <li class="month_num"><span class="m_num_sty">22</span></li>
+          <li class="month_num"><span class="m_num_sty">22</span></li>
+          <li class="month_num"><span class="m_num_sty">22</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="../js/weeklyCalendar.js"></script>
+    <script>
+       
+      weeklyCalendar({
+        clickDate(dateTime){
+          console.log(dateTime);
+        },
+       //  sel_tDate:"2021-08-23" //可以传指定日期查询
+      });
+ </script>
+  </body>
+
+</html>
