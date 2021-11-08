@@ -12,7 +12,8 @@
 
     <meta name="viewport" content="width=device-width, user-scalable=no">
 
-  
+    <link rel="stylesheet" href="../css/mui.min.css" />
+    <link rel="stylesheet" href="../css/mui.picker.min.css" />
 
     <title>Document</title>
     <style>
@@ -188,7 +189,8 @@
       </div>
     </div>
 
-  
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/mui.picker.min.js"></script>
     <script src="../js/index.js"></script>
 
     <script>
@@ -205,11 +207,42 @@
           //  sel_tDate:"2021-08-23" //可以传指定日期查询
         });
 
-        // test.init(text);   滚动后 选中某一日期 对周历进行初始化
-    
-  }
+        var time_box = document.getElementById("time_box");
+        var dtpicker = new mui.DtPicker({
+          type: "date",
+          beginDate: new Date(1990, 01, 01),
+          endDate: new Date(),
+        });
 
+        var dtp = document.getElementsByClassName("mui-dtpicker")[0];
+        dtp.className = "mui-dtpicker dtpickernone";
+        var flag = true;
 
+        time_box.addEventListener("click", function () {
+          dtp.className = "mui-dtpicker";
+          setTimeout(function () {
+            dtpicker.show(function (selectItems) {
+              var text = selectItems.text; //日历弹出 点击确定获取日历的日期(ajax请求)
+
+              test.init(text);
+              dtp.className = "mui-dtpicker dtpickernone";
+            });
+
+            if (flag) {
+              var mask = document.getElementsByClassName("mui-backdrop")[0];
+              mask.addEventListener("click", function () {
+                var timer = setTimeout(function () {
+                  dtp.className = "mui-dtpicker dtpickernone";
+                }, 300);
+              });
+
+              flag = false;
+            }
+          }, 10);
+        });
+      }
+
+      // console.log(window.performance.now());
     </script>
   </body>
 </html>
