@@ -1,248 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="stylesheet" href="../js/mui/css/mui.min.css" />
+  <link rel="stylesheet" href="../js/mui/css/mui.picker_new.min.css" />
+  <title>Document</title>
+  <style>
+    body,
+    ul,
+    p {
+      margin: 0;
+      padding: 0;
+    }
 
-    <meta name="viewport" content="width=device-width, user-scalable=no">
+    ul {
+      list-style: none;
+    }
 
-    <link rel="stylesheet" href="../css/mui.min.css" />
-    <link rel="stylesheet" href="../css/mui.picker.min.css" />
+    .week_wrapper_box {
+      width: 100%;
+      overflow: hidden;
+      background-color: #fff;
+    }
 
-    <title>Document</title>
-    <style>
-      body,
-      ul,
-      p {
-        margin: 0;
-        padding: 0;
-      }
+    .year_month {
+      padding: 2px 15px;
+      box-sizing: content-box;
+    }
 
-      ul {
-        list-style: none;
-      }
+    .week_cal_box {
+      display: flex;
+      width: 500%;
+      height: 33px;
+      align-items: center;
+      transition: transform 0.7s;
+      transform: translateX(-40%);
+      background-color: rgba(255, 127, 80, 0.253);
+      padding: 3px 0;
+      /* will-change: transform; */
+      box-sizing: content-box;
+    }
 
-      .week_wrapper_box {
-        width: 100%;
-        overflow: hidden;
-        background-color: #fff;
-      }
+    .week_content {
+      display: flex;
+      width: 100%;
+      justify-content: space-around;
+      align-items: center;
+      text-align: center;
+    }
 
-      .year_month {
-        padding: 2px 15px;
-        box-sizing: content-box;
-      }
+    .week_tit_info {
+      height: 20px;
+      flex: 1;
+      padding: 5px 0;
+      background-color: #fff;
+      box-sizing: content-box;
+    }
 
-      .week_cal_box {
-        display: flex;
-        width: 500%;
-        height: 33px;
-        align-items: center;
-        transition: transform 0.7s;
-        transform: translateX(-40%);
-        background-color: rgba(255, 127, 80, 0.253);
-        padding: 3px 0;
-        /* will-change: transform; */
-        box-sizing: content-box;
-      }
+    .week_content .month_num {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 32px;
+      height: 32px;
+      padding-right: 1px;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
 
-      .week_content {
-        display: flex;
-        width: 100%;
-        justify-content: space-around;
-        align-items: center;
-        text-align: center;
-      }
+    .today {
+      background: #7da8ed;
+      color: #fff;
+    }
 
-      .week_tit_info {
-        height: 20px;
-        flex: 1;
-        padding: 5px 0;
-        background-color: #fff;
-        box-sizing: content-box;
-      }
+    .selected_num {
+      border: 2px solid #7da8ed;
+    }
 
-      .week_content .month_num {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 32px;
-        height: 32px;
-        padding-right: 1px;
-        border-radius: 50%;
-        box-sizing: border-box;
-      }
+    .year_month {
+      height: 38px;
+      line-height: 38px;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      border-bottom: 1px solid #e5e5e5;
+    }
 
-      .today {
-        background: #7da8ed;
-        color: #fff;
-      }
-      .selected_num {
-        border: 2px solid #7da8ed;
-      }
+    #year_text,
+    #month_text {
+      overflow: hidden;
+    }
 
-      .year_month {
-        height: 38px;
-        line-height: 38px;
-        display: flex;
-        justify-content: center;
-        text-align: center;
-        border-bottom: 1px solid #e5e5e5;
-      }
+    #year_text {
+      width: 12%;
+    }
 
-      #year_text,
-      #month_text {
-        overflow: hidden;
-      }
+    #month_text {
+      width: 8%;
+    }
 
-      #year_text {
-        width: 12%;
-      }
-      #month_text {
-        width: 8%;
-      }
+    .dtpickernone {
+      display: none;
+    }
 
-      .dtpickernone {
-        display: none;
-      }
-      .dtpickerdis {
-        display: block;
-      }
-    </style>
-  </head>
+    .dtpickerdis {
+      display: block;
+    }
+  </style>
+</head>
 
-  <body>
-    <div class="week_wrapper_box">
-      <div class="year_month" id="time_box">
-        <div id="year_text">1</div>
-        年
-        <div id="month_text">1</div>
-        月
-      </div>
-
-      <ul class="week_content week_tit_info">
-        <li class="week_num">一</li>
-        <li class="week_num">二</li>
-        <li class="week_num">三</li>
-        <li class="week_num">四</li>
-        <li class="week_num">五</li>
-        <li class="week_num">六</li>
-        <li class="week_num">日</li>
-      </ul>
-
-      <div class="week_cal_box" id="week_cal_box">
-        <ul class="week_content" id="content1">
-          <li class="month_num m_num1">1</li>
-          <li class="month_num m_num1">1</li>
-          <li class="month_num m_num1">1</li>
-          <li class="month_num m_num1">1</li>
-          <li class="month_num m_num1">1</li>
-          <li class="month_num m_num1">1</li>
-          <li class="month_num m_num1">1</li>
-        </ul>
-
-        <ul class="week_content" id="content2">
-          <li class="month_num m_num2">2</li>
-          <li class="month_num m_num2">2</li>
-          <li class="month_num m_num2">2</li>
-          <li class="month_num m_num2">2</li>
-          <li class="month_num m_num2">2</li>
-          <li class="month_num m_num2">2</li>
-          <li class="month_num m_num2">2</li>
-        </ul>
-
-        <ul class="week_content" id="content3">
-          <li class="month_num m_num3">3</li>
-          <li class="month_num m_num3">3</li>
-          <li class="month_num m_num3">3</li>
-          <li class="month_num m_num3">3</li>
-          <li class="month_num m_num3">3</li>
-          <li class="month_num m_num3">3</li>
-          <li class="month_num m_num3">3</li>
-        </ul>
-
-        <ul class="week_content" id="content4">
-          <li class="month_num m_num4">4</li>
-          <li class="month_num m_num4">4</li>
-          <li class="month_num m_num4">4</li>
-          <li class="month_num m_num4">4</li>
-          <li class="month_num m_num4">4</li>
-          <li class="month_num m_num4">4</li>
-          <li class="month_num m_num4">4</li>
-        </ul>
-
-        <ul class="week_content" id="content5">
-          <li class="month_num m_num5">5</li>
-          <li class="month_num m_num5">5</li>
-          <li class="month_num m_num5">5</li>
-          <li class="month_num m_num5">5</li>
-          <li class="month_num m_num5">5</li>
-          <li class="month_num m_num5">5</li>
-          <li class="month_num m_num5">5</li>
-        </ul>
-      </div>
+<body>
+  <div class="week_wrapper_box">
+    <div class="year_month" id="time_box">
+      <div id="year_text">1</div>
+      年
+      <div id="month_text">1</div>
+      月
     </div>
 
-    <script src="../js/mui.min.js"></script>
-    <script src="../js/mui.picker.min.js"></script>
-    <script src="../js/index.js"></script>
+    <ul class="week_content week_tit_info">
+      <li class="week_num">一</li>
+      <li class="week_num">二</li>
+      <li class="week_num">三</li>
+      <li class="week_num">四</li>
+      <li class="week_num">五</li>
+      <li class="week_num">六</li>
+      <li class="week_num">日</li>
+    </ul>
 
-    <script>
+    <div class="week_cal_box" id="week_cal_box">
+      <ul class="week_content" id="content1">
+        <li class="month_num m_num1">1</li>
+        <li class="month_num m_num1">1</li>
+        <li class="month_num m_num1">1</li>
+        <li class="month_num m_num1">1</li>
+        <li class="month_num m_num1">1</li>
+        <li class="month_num m_num1">1</li>
+        <li class="month_num m_num1">1</li>
+      </ul>
 
-      g_test();
+      <ul class="week_content" id="content2">
+        <li class="month_num m_num2">2</li>
+        <li class="month_num m_num2">2</li>
+        <li class="month_num m_num2">2</li>
+        <li class="month_num m_num2">2</li>
+        <li class="month_num m_num2">2</li>
+        <li class="month_num m_num2">2</li>
+        <li class="month_num m_num2">2</li>
+      </ul>
 
-      function g_test() {
-      
-        var test = weeklyCalendar({
-          clickDate(dateTime) {
-            // 点击周历获取点击的时间(ajax请求)
-            console.log(dateTime);
-          },
-          //  sel_tDate:"2021-08-23" //可以传指定日期查询
+      <ul class="week_content" id="content3">
+        <li class="month_num m_num3">3</li>
+        <li class="month_num m_num3">3</li>
+        <li class="month_num m_num3">3</li>
+        <li class="month_num m_num3">3</li>
+        <li class="month_num m_num3">3</li>
+        <li class="month_num m_num3">3</li>
+        <li class="month_num m_num3">3</li>
+      </ul>
+
+      <ul class="week_content" id="content4">
+        <li class="month_num m_num4">4</li>
+        <li class="month_num m_num4">4</li>
+        <li class="month_num m_num4">4</li>
+        <li class="month_num m_num4">4</li>
+        <li class="month_num m_num4">4</li>
+        <li class="month_num m_num4">4</li>
+        <li class="month_num m_num4">4</li>
+      </ul>
+
+      <ul class="week_content" id="content5">
+        <li class="month_num m_num5">5</li>
+        <li class="month_num m_num5">5</li>
+        <li class="month_num m_num5">5</li>
+        <li class="month_num m_num5">5</li>
+        <li class="month_num m_num5">5</li>
+        <li class="month_num m_num5">5</li>
+        <li class="month_num m_num5">5</li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="../js/mui/mui.min.js"></script>
+  <script src="../js/mui/mui.picker_new.min.js"></script>
+  <script src="../js/index.js"></script>
+
+  <script>
+
+    g_test();
+    function g_test() {
+      var test = weeklyCalendar({
+        clickDate(dateTime) {
+          // 点击周历获取点击的时间(ajax请求)
+          console.log(dateTime);
+        },
+        //  sel_tDate:"2021-08-23" //可以传指定日期查询
+      });
+
+      var time_box = document.getElementById("time_box");
+      var dtpicker = new mui.DtPicker({
+        type: "date",
+        beginDate: new Date(2010, 1, 1),
+        endDate: new Date(),
+      });
+
+      time_box.addEventListener("click", function () {
+        dtpicker.show(function (selectItems) {
+          var text = selectItems.text; //日历弹出 点击确定获取日历的日期(ajax请求)
+          test.init(text);
         });
+      });
 
-        var time_box = document.getElementById("time_box");
-        var dtpicker = new mui.DtPicker({
-          type: "date",
-          beginDate: new Date(1990, 01, 01),
-          endDate: new Date(),
-        });
+    }
 
-        var dtp = document.getElementsByClassName("mui-dtpicker")[0];
-        dtp.className = "mui-dtpicker dtpickernone";
-        var flag = true;
+  </script>
+</body>
 
-        time_box.addEventListener("click", function () {
-          dtp.className = "mui-dtpicker";
-          setTimeout(function () {
-            dtpicker.show(function (selectItems) {
-              var text = selectItems.text; //日历弹出 点击确定获取日历的日期(ajax请求)
-
-              test.init(text);
-              dtp.className = "mui-dtpicker dtpickernone";
-            });
-
-            if (flag) {
-              var mask = document.getElementsByClassName("mui-backdrop")[0];
-              mask.addEventListener("click", function () {
-                var timer = setTimeout(function () {
-                  dtp.className = "mui-dtpicker dtpickernone";
-                }, 300);
-              });
-
-              flag = false;
-            }
-          }, 10);
-        });
-      }
-
-      // console.log(window.performance.now());
-    </script>
-  </body>
 </html>

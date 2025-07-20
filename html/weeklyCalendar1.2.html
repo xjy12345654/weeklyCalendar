@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+	<link rel="stylesheet" href="../css/weeklyCalendar1.2.css">
+
+</head>
+
+<body>
+
+	<div class="tifixhead">
+		<div class="week_wrapper_box">
+			<div class="year_month" id="time_box">
+				<img class="year_monthleimg" src="../images/last-month.png">
+				<div class="year_monthce">
+					<div id="" class="year_monthcec1">2024-09-01</div>
+					<img class="calendarimg" src="../images/calendar.png" alt="">
+				</div>
+				<img class="year_monthriimg" src="../images/next-month.png">
+			</div>
+			<!-- 周历 -->
+			<ul class="week_content week_tit_info">
+				<li class="week_num">日</li>
+				<li class="week_num">一</li>
+				<li class="week_num">二</li>
+				<li class="week_num">三</li>
+				<li class="week_num">四</li>
+				<li class="week_num">五</li>
+				<li class="week_num">六</li>
+			</ul>
+
+			<div class="week_cal_wrapper">
+				<div class="week_cal_box" id="week_cal_box">
+					<ul class="week_content_grid week_content1"></ul>
+					<ul class="week_content_grid week_content2"></ul>
+					<ul class="week_content_grid week_content3"></ul>
+					<ul class="week_content_grid week_content4"></ul>
+					<ul class="week_content_grid week_content5"></ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../js/weeklyCalendar1.2.js"></script>
+</body>
+<script>
+
+	var weekly_calobj = weeklyCalendar({
+		clickDate(date_time) {
+			// 点击周历获取点击的时间(ajax请求)
+			console.log(date_time);
+		},
+		//  sel_date:"2021-08-23" //可以传指定日期查询
+	});
+
+
+	var doc = document;
+	var year_monthcec1 = doc.getElementsByClassName("year_monthcec1")[0];
+	/*前一天*/
+	doc.getElementsByClassName("year_monthleimg")[0].onclick = function () {
+		preday_nextday("left");
+	};
+	/*后一天*/
+	doc.getElementsByClassName("year_monthriimg")[0].onclick = function () {
+		preday_nextday("right");
+	};
+	function preday_nextday(str) {
+		var day = year_monthcec1.textContent;
+		var _today = new Date(day);
+		var pr_nedate;
+		if (str === "left") {
+			pr_nedate = new Date(_today.setDate(_today.getDate() - 1));
+		} else {
+			pr_nedate = new Date(_today.setDate(_today.getDate() + 1));
+		}
+		year_monthcec1.textContent = formatDate(pr_nedate);
+		// 更新周历
+		weekly_calobj.init(pr_nedate);
+
+	};
+	var formatDate = function (date) {
+		var y = date.getFullYear();
+		var m = date.getMonth() + 1;
+		m = m < 10 ? '0' + m : m;
+		var d = date.getDate();
+		d = d < 10 ? ('0' + d) : d;
+		return y + '-' + m + '-' + d;
+	};
+
+
+</script>
+
+</html>
